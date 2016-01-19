@@ -34,12 +34,12 @@ class GLSL{
 
             void main() {
                 vec2 uv = texCoordVarying;
-                vec4 Texel = texture2D(texMap, uv);
-                vec4 v = vec4(0.);
+                vec4 T  = texture2D(texMap, uv);
+                vec4 v  = vec4(0.);
                 for(int i = 0; i < MAX_NUM_LIGHT; i++) {
                     v+=light(uv, vec2(LUCI[i].position.x,LUCI[i].position.y), LUCI[i].size, LUCI[i].focus, LUCI[i].brightness, LUCI[i].colors);
                 }
-                fragColor = v*Texel;
+                fragColor = v*T;
             }
         );
 

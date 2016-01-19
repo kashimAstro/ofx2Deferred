@@ -69,7 +69,7 @@ class ofxDeferredLight2D {
         stage(NUM_LIGHT,position,colors,size,focus,brightness);
     }
 
-    void setup(ofFbo _fbo, int NUM_LIGHT, vector<ofVec2f> position,vector<ofVec4f> colors, vector<float> size, vector<float> focus, vector<float> brightness) {
+    void setup(ofFbo &_fbo, int NUM_LIGHT, vector<ofVec2f> position,vector<ofVec4f> colors, vector<float> size, vector<float> focus, vector<float> brightness) {
         vector<string> v = glsl.setup(NUM_LIGHT);
         shader.setupShaderFromSource(GL_VERTEX_SHADER,v[0]);
         shader.setupShaderFromSource(GL_FRAGMENT_SHADER,v[1]);
