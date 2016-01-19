@@ -13,7 +13,7 @@ class ofApp : public ofBaseApp{
         ofParameter<ofVec4f> colors;
         ofImage tex;
 
-        ofxDefferedLight2D def;
+        ofxDeferredLight2D def;
         vector<ofIcoSpherePrimitive> ico;
         vector<ofVec2f> posIco;
         vector<ofColor> colorsIco;
