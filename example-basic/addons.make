@@ -1,2 +1,2 @@
 ofxGui
-ofx2Deffered
+ofx2Deferred

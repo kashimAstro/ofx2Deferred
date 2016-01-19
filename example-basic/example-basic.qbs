@@ -16,7 +16,7 @@ Project{
         ]
 
         of.addons: [
-            'ofxGui','ofx2Deffered',
+            'ofxGui','ofx2Deferred',
         ]
 
         // additional flags for the project. the of module sets some

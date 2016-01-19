@@ -1,6 +1,6 @@
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "ofx2Deffered.h"
+#include "ofx2Deferred.h"
 
 class ofApp : public ofBaseApp{
 

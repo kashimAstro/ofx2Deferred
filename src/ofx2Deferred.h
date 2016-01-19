@@ -9,7 +9,7 @@ struct Lighting {
     ofVec4f colors;
 };
 
-class ofxDefferedLight2D {
+class ofxDeferredLight2D {
   public:
     GLSL glsl;
     ofShader shader;
