@@ -20,7 +20,8 @@ class ofxDeferredLight2D {
     ofFbo fbo;
     vector<Lighting> light;
     vector<ofVec2f> light_position;
-    vector<ofColor> light_colors;
+    vector<ofColor> light_colors; 
+    ofPlanePrimitive plane;
 
     void stage( int NUM_LIGHT,vector<ofVec2f> position, vector<ofVec4f> colors, vector<float> size, vector<float> focus, vector<float> brightness ) {
         light.clear();
@@ -64,12 +65,16 @@ class ofxDeferredLight2D {
         }
         shader.linkProgram();
 
+	#ifdef TARGET_OPENGLES
+	plane.set(ofGetScreenWidth()+ofGetScreenWidth(), ofGetScreenHeight()+ofGetScreenHeight(), 10, 10);
+	plane.mapTexCoords(0, 0, img.getWidth(), img.getHeight());
+	#else
         fbo.allocate(img.getWidth(),img.getHeight());
         fbo.begin();
         ofClear(0,0,0,0);
             img.draw(0,0);
         fbo.end();
-
+	#endif
         stage(NUM_LIGHT,position,colors,size,focus,brightness);
     }
 
@@ -91,7 +96,11 @@ class ofxDeferredLight2D {
 
     void draw(){
         shader.begin();
+	#ifdef TARGET_OPENGLES
+        shader.setUniformTexture("tex",img.getTexture(),0);
+	#else
         shader.setUniformTexture("tex",fbo.getTexture(),1);
+	#endif
         shader.setUniform2f("resol",ofGetWidth(),ofGetHeight());
         shader.setUniform1f("time",ofGetElapsedTimeMillis()*0.0005);
         for(int i = 0; i < light.size(); i++){
@@ -101,7 +110,11 @@ class ofxDeferredLight2D {
             shader.setUniform1f("LUCI["+ofToString(i)+"].brightness",light[i].brightness);
             shader.setUniform4f("LUCI["+ofToString(i)+"].colors",light[i].colors.x,light[i].colors.y,light[i].colors.z,light[i].colors.w);
         }
+	#ifdef TARGET_OPENGLES
+	plane.draw();
+	#else
         fbo.draw(0,0);
+	#endif
         shader.end();
     }
 };
