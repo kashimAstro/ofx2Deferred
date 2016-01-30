@@ -1,0 +1,4 @@
+ofxAndroid
+ofxAccelerometer
+ofxGui
+ofx2Deferred

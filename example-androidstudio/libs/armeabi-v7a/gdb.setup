@@ -1,0 +1,7 @@
+set solib-search-path /home/kashim/of_0.9.1_android/of_v0.9.1RC1_android_release/apps/myApps/example-android/obj/local/armeabi-v7a:/home/kashim/of_0.9.1_android/of_v0.9.1RC1_android_release/apps/myApps/example-android/libs/armeabi-v7a
+set sysroot /home/kashim/of_0.9.1_android/android-ndk-r10e//platforms/android-19/arch-arm/
+directory /home/kashim/of_0.9.1_android/android-ndk-r10e//platforms/android-19/arch-arm/usr/include
+directory /home/kashim/of_0.9.1_android/of_v0.9.1RC1_android_release/apps/myApps/example-android/src
+directory /home/kashim/of_0.9.1_android/android-ndk-r10e//sources/cxx-stl/system
+directory /home/kashim/of_0.9.1_android/of_v0.9.1RC1_android_release/apps/myApps/example-android/libs/armeabi-v7a
+

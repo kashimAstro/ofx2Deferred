@@ -18,6 +18,7 @@ class ofxDeferredLight2D {
     GLSL glsl;
     ofShader shader;
     ofFbo fbo;
+    ofImage img;
     vector<Lighting> light;
     vector<ofVec2f> light_position;
     vector<ofColor> light_colors; 
@@ -57,6 +58,7 @@ class ofxDeferredLight2D {
     }
 
     void setup(ofImage img,int NUM_LIGHT, vector<ofVec2f> position,vector<ofVec4f> colors, vector<float> size, vector<float> focus, vector<float> brightness) {
+	img = _img;
         vector<string> v = glsl.setup(NUM_LIGHT);
         shader.setupShaderFromSource(GL_VERTEX_SHADER,v[0]);
         shader.setupShaderFromSource(GL_FRAGMENT_SHADER,v[1]);
