@@ -1,5 +1,9 @@
 #include "ofMain.h"
-#include "glsl.h"
+#ifdef TARGET_OPENGLES
+	#include "glslES.h"
+#else
+	#include "glsl.h"
+#endif
 
 struct Lighting {
     ofVec2f position;
