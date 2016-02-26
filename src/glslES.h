@@ -6,7 +6,6 @@ class GLSL{
 
     vector<string> setup(int NUM){
         vector<string> result;
-        string version = "\n#version 120\n";
         string num = "\n#define MAX_NUM_LIGHT "+ofToString(NUM)+"\n";
 
         string frag = str(
@@ -55,10 +54,6 @@ class GLSL{
                 }
 
         );
-
-//        result.push_back(version+vert);
-//        result.push_back(version+num+frag);
-
         result.push_back(vert);
         result.push_back(num+frag);
 
