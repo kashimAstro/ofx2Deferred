@@ -1,15 +1,16 @@
 #pragma once
 
 #include "ofMain.h"
-#include "glsl.h"
+//#include "glsl.h"
+#include "ofx2Deferred.h"
 
-struct Lighting {
+/*struct Lighting {
 	ofVec2f position;
 	float size;
 	float focus;
 	float brightness;
 	ofVec4f colors;
-};
+};*/
 
 class ofApp : public ofBaseApp{
 	
