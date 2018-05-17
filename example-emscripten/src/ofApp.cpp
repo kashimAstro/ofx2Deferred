@@ -2,15 +2,15 @@
 
 void ofApp::init() {
 	for(int i = 0; i < NUM_LIGHT; i++) {
-		pos.push_back(ofVec2f(ofRandom(0.0,1.0),ofRandom(1.0,0.0)));
-		col.push_back(ofVec4f(ofRandom(0.0,1.0),ofRandom(0.0,1.0),ofRandom(0.0,1.0),1.0));
+		pos.push_back(glm::vec2(ofRandom(0.0,1.0),ofRandom(1.0,0.0)));
+		col.push_back(glm::vec4(ofRandom(0.0,1.0),ofRandom(0.0,1.0),ofRandom(0.0,1.0),1.0));
 		siz.push_back(0.00222222);
 		foc.push_back(-0.0099999);
 		bri.push_back(25.5);
 	}
 }
 
-void ofApp::prepare_stage(int N,vector<ofVec2f> p,vector<ofVec4f> c,vector<float> s,vector<float> f,vector<float> b) {
+void ofApp::prepare_stage(int N,vector<glm::vec2> p,vector<glm::vec4> c,vector<float> s,vector<float> f,vector<float> b) {
 	light.clear();
 	for(int i = 0; i < N; i++) {
 		Lighting l;
@@ -46,7 +46,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	light[0].position=ofVec2f(ofMap(mouseX,0,ofGetWidth(),0.,1.),ofMap(mouseY,0,ofGetHeight(),1.,0.));
+	light[0].position=glm::vec2(ofMap(mouseX,0,ofGetWidth(),0.,1.),ofMap(mouseY,0,ofGetHeight(),1.,0.));
 }
 
 //--------------------------------------------------------------

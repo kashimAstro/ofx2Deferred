@@ -13,16 +13,16 @@ class ofApp : public ofBaseApp{
 
         ofxDeferredLight2D def;
         vector<ofIcoSpherePrimitive> ico;
-        vector<ofVec2f> posIco;
+        vector<glm::vec2> posIco;
         vector<ofColor> colorsIco;
-        vector<ofVec2f> pos;
-        vector<ofVec4f> col;
+        vector<glm::vec2> pos;
+        vector<glm::vec4> col;
         vector<float>   siz,foc,bri;
 
         void init() {
             for(int i = 0; i < NUM_LIGHT; i++) {
-                pos.push_back(ofVec2f(ofRandom(0.2,0.8),ofRandom(0.2,0.8)));
-                col.push_back(ofVec4f(ofRandom(0.,1.),ofRandom(0.,1.),ofRandom(0.,1.),1.));
+                pos.push_back(glm::vec2(ofRandom(0.2,0.8),ofRandom(0.2,0.8)));
+                col.push_back(glm::vec4(ofRandom(0.,1.),ofRandom(0.,1.),ofRandom(0.,1.),1.));
                 siz.push_back(0.00777777);
                 foc.push_back(-0.0099999);
                 bri.push_back(25.f);
@@ -33,15 +33,15 @@ class ofApp : public ofBaseApp{
             for(int i = 0; i < posIco.size(); i++){
                 ofIcoSpherePrimitive ic;
                 ic.set(28,1);
-                ic.setPosition(posIco[i]);
+                ic.setPosition(glm::vec3(posIco[i].x,posIco[i].y,0));
                 ico.push_back(ic);
             }
             /* trick fake global shadow */
             def.light[0].size=0;
             def.light[0].focus=-1;
             def.light[0].brightness=-1;
-            def.light[0].position=ofVec2f(0.5,0.5);
-            def.light[0].colors=ofVec4f(1,1,1,1);
+            def.light[0].position=glm::vec2(0.5,0.5);
+            def.light[0].colors=glm::vec4(1,1,1,1);
         }
 
         void setup(){
@@ -124,8 +124,7 @@ class ofApp : public ofBaseApp{
 int main( ){
     ofGLWindowSettings s;
     s.setGLVersion(3, 2);
-    s.width=1366;
-    s.height=768;
+    s.setSize(1366,768);
     ofCreateWindow(s);
     ofRunApp(new ofApp());
 }

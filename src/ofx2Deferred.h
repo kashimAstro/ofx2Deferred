@@ -6,11 +6,11 @@
 #endif
 
 struct Lighting {
-    ofVec2f position;
+    glm::vec2 position;
     float size;
     float focus;
     float brightness;
-    ofVec4f colors;
+    glm::vec4 colors;
 };
 
 class ofxDeferredLight2D {
@@ -20,11 +20,11 @@ class ofxDeferredLight2D {
     ofFbo fbo;
     ofImage img;
     vector<Lighting> light;
-    vector<ofVec2f> light_position;
+    vector<glm::vec2> light_position;
     vector<ofColor> light_colors; 
     ofPlanePrimitive plane;
 
-    void stage( int NUM_LIGHT,vector<ofVec2f> position, vector<ofVec4f> colors, vector<float> size, vector<float> focus, vector<float> brightness ) {
+    void stage( int NUM_LIGHT,vector<glm::vec2> position, vector<glm::vec4> colors, vector<float> size, vector<float> focus, vector<float> brightness ) {
         light.clear();
         light_position.clear();
         light_colors.clear();
@@ -37,7 +37,7 @@ class ofxDeferredLight2D {
             l.position   = position[i];
             light.push_back(l);
 
-            ofVec2f pos = ofVec2f(ofMap(position[i].x,0.,1.,0,fbo.getWidth()),ofMap(position[i].y,0.,1.,0,fbo.getHeight()));
+            glm::vec2 pos(ofMap(position[i].x,0.,1.,0,fbo.getWidth()),ofMap(position[i].y,0.,1.,0,fbo.getHeight()));
             light_position.push_back(pos);
             ofColor col = ofColor(
                                   (int)ofMap(colors[i].x,0.,1.,0,255),
@@ -49,7 +49,7 @@ class ofxDeferredLight2D {
         }
     }
 
-    vector<ofVec2f> getPositionRealCoord() {
+    vector<glm::vec2> getPositionRealCoord() {
         return light_position;
     }
 
@@ -57,7 +57,7 @@ class ofxDeferredLight2D {
         return light_colors;
     }
 
-    void setup(ofImage _img,int NUM_LIGHT, vector<ofVec2f> position,vector<ofVec4f> colors, vector<float> size, vector<float> focus, vector<float> brightness) {
+    void setup(ofImage _img,int NUM_LIGHT, vector<glm::vec2> position,vector<glm::vec4> colors, vector<float> size, vector<float> focus, vector<float> brightness) {
 	img = _img;
         vector<string> v = glsl.setup(NUM_LIGHT);
         shader.setupShaderFromSource(GL_VERTEX_SHADER,v[0]);
@@ -71,7 +71,11 @@ class ofxDeferredLight2D {
 	plane.set(ofGetScreenWidth()+ofGetScreenWidth(), ofGetScreenHeight()+ofGetScreenHeight(), 10, 10);
 	plane.mapTexCoords(0, 0, img.getWidth(), img.getHeight());
 	#else
-        fbo.allocate(img.getWidth(),img.getHeight());
+	ofFbo::Settings s;
+	s.width=img.getWidth();
+	s.height=img.getHeight();
+	s.useDepth=true;
+        fbo.allocate(s);
         fbo.begin();
         ofClear(0,0,0,0);
             img.draw(0,0);
@@ -80,7 +84,7 @@ class ofxDeferredLight2D {
         stage(NUM_LIGHT,position,colors,size,focus,brightness);
     }
 
-    void setup(ofFbo &_fbo, int NUM_LIGHT, vector<ofVec2f> position,vector<ofVec4f> colors, vector<float> size, vector<float> focus, vector<float> brightness) {
+    void setup(ofFbo &_fbo, int NUM_LIGHT, vector<glm::vec2> position,vector<glm::vec4> colors, vector<float> size, vector<float> focus, vector<float> brightness) {
         vector<string> v = glsl.setup(NUM_LIGHT);
         shader.setupShaderFromSource(GL_VERTEX_SHADER,v[0]);
         shader.setupShaderFromSource(GL_FRAGMENT_SHADER,v[1]);
