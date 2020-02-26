@@ -109,7 +109,7 @@ class ofxDeferredLight2D {
 	#endif
         shader.setUniform2f("resol",ofGetWidth(),ofGetHeight());
         shader.setUniform1f("time",ofGetElapsedTimeMillis()*0.0005);
-        for(int i = 0; i < light.size(); i++){
+        for(size_t i = 0; i < light.size(); i++){
             shader.setUniform2f("LUCI["+ofToString(i)+"].position",light[i].position.x,light[i].position.y);
             shader.setUniform1f("LUCI["+ofToString(i)+"].size", light[i].size);
             shader.setUniform1f("LUCI["+ofToString(i)+"].focus",light[i].focus);
